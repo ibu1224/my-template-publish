@@ -11,4 +11,17 @@ config:
       requires: [ ~commit ]
       steps:
         - install: npm i -g screwdriver-template-main
-      　　 - validate: template-validate
+        - validate: template-validate
+    publish:
+      requires: [ ~validate ]
+      steps:
+        - npm i -g screwdriver-template-main
+        - template-publish
+    promote:
+      requires: []
+      steps:
+      　　- install: npm i -g screwdriver-template-main
+       - get_template_version: |
+        export VERSION=`./node_modules/.bin/template-get-version-from-tag --name "$TEMPLATE_NAME" --tag "$FROM_TAG_NAME"`
+       - promote_tag: |
+        ./node_modules/.bin/template-tag --name "$TEMPLATE_NAME" --version "$VERSION" --tag "$TO_TAG_NAME"
