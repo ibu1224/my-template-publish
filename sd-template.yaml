@@ -16,4 +16,4 @@ config:
       requires: [ ~validate ]
       steps:
         - npm i -g screwdriver-template-main
-        - template-publish
+        -./node_modules/.bin/template-publish
