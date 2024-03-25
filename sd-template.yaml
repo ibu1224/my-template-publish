@@ -1,0 +1,14 @@
+namespace: ibu-test
+name: template-publish-test
+version: '1.0.0'
+description: "foobar"
+maintainer: foo@bar.com
+config:
+  shared:
+    image: node:20
+  jobs:
+    validate:
+      requires: [ ~commit ]
+      steps:
+        - install: npm i -g screwdriver-template-main
+      　　 - validate: template-validate
